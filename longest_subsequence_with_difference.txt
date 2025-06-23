@@ -1,0 +1,18 @@
+class Solution:
+    def maxLenSub(self, arr):
+        dp = {}
+        best = 0
+
+        for x in arr:
+        
+            prev1 = dp.get(x - 1, 0)
+            same  = dp.get(x, 0)
+            next1 = dp.get(x + 1, 0)
+            
+            
+            dp[x] = 1 + max(prev1, same, next1)
+
+            
+            best = max(best, dp[x])
+
+        return best
