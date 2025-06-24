@@ -1,0 +1,54 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def reverseKGroup(self, head, k):
+
+        def reverse(start, k):
+            prev = None
+            curr = start
+            while k > 0:
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+                k -= 1
+            return prev  
+
+        
+        count = 0
+        node = head
+        while node:
+            count += 1
+            node = node.next
+
+        dummy = ListNode(0)  
+        dummy.next = head
+        prev = dummy
+        curr = head
+
+       
+        while count >= k:
+            tail = curr  
+            for _ in range(k):
+                curr = curr.next  
+            next_group = curr  
+
+        
+            reversed_head = reverse(tail, k)
+
+    
+            prev.next = reversed_head
+            tail.next = next_group
+
+            
+            prev = tail
+            count -= k
+
+    
+        if count > 0 and curr:
+            prev.next = reverse(curr, count)
+
+        return dummy.next
